@@ -1,5 +1,29 @@
+import { useEffect, useState } from "react";
 import heroCar from "@/assets/hero-car.jpg";
 import { ArrowRight, Phone, Users, Car, Award } from "lucide-react";
+
+function CountUp({ end, suffix = "", duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      
+      // easeOut expo
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      setCount(Math.floor(easeProgress * end));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [end, duration]);
+
+  return <>{count.toLocaleString()}{suffix}</>;
+}
 
 export function Hero() {
   return (
@@ -49,13 +73,15 @@ export function Hero() {
 
           <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-4">
             {[
-              { icon: Users, value: "2,500+", label: "Trusted Customers" },
-              { icon: Car, value: "150+", label: "Premium Vehicles" },
-              { icon: Award, value: "12+", label: "Years of Experience" },
-            ].map(({ icon: Icon, value, label }) => (
+              { icon: Users, end: 2500, suffix: "+", label: "Trusted Customers" },
+              { icon: Car, end: 150, suffix: "+", label: "Premium Vehicles" },
+              { icon: Award, end: 12, suffix: "+", label: "Years of Experience" },
+            ].map(({ icon: Icon, end, suffix, label }) => (
               <div key={label} className="glass-strong rounded-2xl sm:rounded-3xl border border-white/10 p-3 sm:p-6 text-center backdrop-blur-xl flex flex-col items-center justify-center">
                 <Icon className="mx-auto mb-2 sm:mb-3 w-5 h-5 sm:w-7 sm:h-7 text-primary" />
-                <div className="font-display text-base sm:text-2xl md:text-3xl font-bold text-white">{value}</div>
+                <div className="font-display text-base sm:text-2xl md:text-3xl font-bold text-white">
+                  <CountUp end={end} suffix={suffix} />
+                </div>
                 <div className="text-[10px] sm:text-xs md:text-sm text-white/70 mt-1 leading-tight">{label}</div>
               </div>
             ))}
