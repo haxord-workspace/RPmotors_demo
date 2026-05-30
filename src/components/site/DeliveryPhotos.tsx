@@ -1,33 +1,40 @@
 import { ArrowRight } from "lucide-react";
-import car1 from "@/assets/car-1.jpg";
-import car2 from "@/assets/car-2.jpg";
-import car3 from "@/assets/car-3.jpg";
-import car4 from "@/assets/car-4.jpg";
+import car1 from "@/assets/delivery-1.jpg";
+import car2 from "@/assets/delivery-2.jpg";
+import car3 from "@/assets/delivery-3.jpg";
+import car4 from "@/assets/delivery-4.jpg";
+import car5 from "@/assets/delivery-5.jpg";
 
 const deliveryPhotos = [
   {
     img: car1,
     title: "Delivered in style",
-    label: "BMW 5 Series",
+    label: "Happy Family",
     customer: "Mr. Ajay",
   },
   {
     img: car2,
     title: "Happy new owner",
-    label: "Mercedes-Benz GLS",
-    customer: "Mrs. Meera",
+    label: "Premium Handover",
+    customer: "Mr. Arun",
   },
   {
     img: car3,
     title: "Premium handover",
-    label: "Audi A4 Premium",
-    customer: "Mr. Arun",
+    label: "Toyota Delivery",
+    customer: "Mr. Singh",
   },
   {
     img: car4,
     title: "Ready to roll",
-    label: "Toyota Fortuner",
-    customer: "Ms. Priya",
+    label: "Family Delivery",
+    customer: "Mr. Thomas",
+  },
+  {
+    img: car5,
+    title: "A Special Moment",
+    label: "New Car Handover",
+    customer: "Mr. Rahman",
   },
 ];
 
@@ -41,7 +48,7 @@ export function DeliveryPhotos() {
           <p className="mt-4 text-muted-foreground">See our premium deliveries and customer handovers from RP Motors showroom.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {deliveryPhotos.map((photo) => (
             <div key={photo.label} className="group overflow-hidden rounded-3xl border border-white/10 bg-surface shadow-elegant transition-transform hover:-translate-y-2">
               <div className="relative aspect-[4/5] overflow-hidden md:aspect-[3/4]">

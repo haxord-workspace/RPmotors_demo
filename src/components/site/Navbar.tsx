@@ -61,6 +61,20 @@ export function Navbar() {
         </div>
       </div>
 
+      <div className="hidden lg:block bg-[#070707] border-b border-white/10">
+        <nav className="container mx-auto px-6 py-3 flex items-center justify-center gap-10 text-sm font-medium text-foreground/70">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="relative transition-colors duration-300 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
       <div className="border-b border-white/10 bg-primary/5 overflow-hidden py-1.5 flex items-center">
         <div className="flex animate-marquee whitespace-nowrap">
           <div className="flex shrink-0 justify-around min-w-full gap-8 px-4 text-[10px] sm:text-xs font-medium text-primary uppercase tracking-widest">
@@ -88,20 +102,6 @@ export function Navbar() {
             <span>•</span>
           </div>
         </div>
-      </div>
-
-      <div className="hidden lg:block bg-[#070707] border-b border-white/10">
-        <nav className="container mx-auto px-6 py-3 flex items-center justify-center gap-10 text-sm font-medium text-foreground/70">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="relative transition-colors duration-300 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
       </div>
 
       {open && (
