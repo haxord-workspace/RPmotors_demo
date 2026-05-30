@@ -1,0 +1,180 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+
+  --shadow-gold: 0 10px 40px -10px color-mix(in oklab, var(--gold) 40%, transparent);
+  --shadow-elegant: 0 20px 60px -20px oklch(0 0 0 / 0.6);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* RP Motors inspired dark red theme */
+  --background: #050505;
+  --foreground: #f4f4f4;
+
+  --surface: #111111;
+  --surface-elevated: #181818;
+
+  --card: #111111;
+  --card-foreground: #f4f4f4;
+  --popover: #121212;
+  --popover-foreground: #f4f4f4;
+
+  --primary: #ff2525;
+  --primary-foreground: #ffffff;
+
+  --gold: #ff2525;
+  --gold-foreground: #ffffff;
+
+  --secondary: #2c2c2c;
+  --secondary-foreground: #f4f4f4;
+
+  --muted: #8f8f8f;
+  --muted-foreground: #c2c2c2;
+
+  --accent: #ff2525;
+  --accent-foreground: #ffffff;
+
+  --destructive: #d02f2f;
+  --destructive-foreground: #ffffff;
+
+  --border: #272727;
+  --input: #161616;
+  --ring: #ff3f3f;
+
+  --gradient-gold: linear-gradient(135deg, #ff2525, #ff6b60);
+  --gradient-dark: linear-gradient(180deg, #050505 0%, #090909 100%);
+  --gradient-radial-gold: radial-gradient(circle at center, rgba(255,37,37,0.18) 0%, transparent 65%);
+}
+
+
+.dark {
+  /* same as root - always dark */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .glass {
+    background: color-mix(in oklab, var(--surface) 60%, transparent);
+    backdrop-filter: blur(20px);
+    border: 1px solid color-mix(in oklab, var(--gold) 15%, transparent);
+  }
+
+  .glass-strong {
+    background: color-mix(in oklab, var(--surface-elevated) 80%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
+  }
+
+  .shadow-gold-glow {
+    box-shadow: 0 0 60px -15px color-mix(in oklab, var(--gold) 50%, transparent);
+  }
+
+  .hover-lift {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  }
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--surface-elevated); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
