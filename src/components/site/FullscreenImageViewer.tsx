@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, TouchEvent } from "react";
+import { useState, useEffect, useRef, TouchEvent, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface FullscreenImageViewerProps {
@@ -34,6 +34,14 @@ export function FullscreenImageViewer({
     };
   }, [isOpen]);
 
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
   // Keyboard controls
   useEffect(() => {
     if (!isOpen) return;
@@ -52,17 +60,9 @@ export function FullscreenImageViewer({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, images, currentIndex]);
+  }, [isOpen, handlePrev, handleNext, onClose]);
 
   if (!isOpen || images.length === 0) return null;
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
 
   // Touch handlers for swipe support
   const handleTouchStart = (e: TouchEvent) => {
@@ -92,9 +92,7 @@ export function FullscreenImageViewer({
     >
       {/* Top Header Controls */}
       <div className="w-full flex justify-between items-center p-6 z-10">
-        <div className="text-white/60 text-sm font-semibold tracking-wider">
-          RB MOTORS SHOWROOM
-        </div>
+        <div className="text-white/60 text-sm font-semibold tracking-wider">RB MOTORS SHOWROOM</div>
         <button
           onClick={onClose}
           className="p-3.5 rounded-full bg-white/5 hover:bg-[#E53935] hover:scale-105 text-white transition-all cursor-pointer shadow-lg border border-white/10"

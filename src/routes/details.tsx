@@ -70,7 +70,8 @@ export function VehicleDetails() {
             <ShieldAlert className="w-16 h-16 text-primary mx-auto mb-6" />
             <h2 className="font-display text-2xl font-bold mb-4">Vehicle Not Found</h2>
             <p className="text-muted-foreground mb-8">
-              The vehicle you are looking for might have been sold or does not exist in our inventory.
+              The vehicle you are looking for might have been sold or does not exist in our
+              inventory.
             </p>
             <Link
               to="/#cars"
@@ -117,7 +118,6 @@ export function VehicleDetails() {
       <Navbar />
       <main className="flex-1 pt-20 pb-20">
         <div className="container mx-auto px-4 sm:px-6">
-
           {/* Back Button */}
           <button
             onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))}
@@ -129,10 +129,16 @@ export function VehicleDetails() {
           {/* Title */}
           <div className="mb-4">
             <div className="flex items-center gap-3 mb-2">
-              <span className="px-3 py-1 rounded-full glass-strong text-xs font-semibold text-gold">{car.brand}</span>
-              <span className="px-3 py-1 rounded-full glass-strong text-xs font-semibold text-foreground/80">{car.tag}</span>
+              <span className="px-3 py-1 rounded-full glass-strong text-xs font-semibold text-gold">
+                {car.brand}
+              </span>
+              <span className="px-3 py-1 rounded-full glass-strong text-xs font-semibold text-foreground/80">
+                {car.tag}
+              </span>
             </div>
-            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">{car.name}</h1>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              {car.name}
+            </h1>
             <div className="flex items-center gap-2 mt-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4 text-primary" /> {car.location}
             </div>
@@ -140,14 +146,11 @@ export function VehicleDetails() {
 
           {/* Main Grid */}
           <div className="grid lg:grid-cols-3 gap-6 items-start mb-12">
-
             {/* Left Column */}
             <div className="lg:col-span-2 flex flex-col gap-6">
-
               {/* Gallery Card */}
               {/* FIX: removed overflow-hidden from outer wrapper so thumbnails aren't clipped */}
               <div className="glass rounded-2xl sm:rounded-3xl border border-white/5 group/gallery w-full overflow-hidden">
-
                 {/* Main Image with overlay tabs + nav */}
                 {/* FIX 1: replaced fixed h-[240px] sm:h-[320px] md:h-[380px] lg:h-[500px] with aspect-video */}
                 <div
@@ -166,20 +169,28 @@ export function VehicleDetails() {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <button
-                      onClick={() => { setGalleryTab("exterior"); setActiveImageIndex(0); }}
-                      className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all backdrop-blur-sm border ${galleryTab === "exterior"
+                      onClick={() => {
+                        setGalleryTab("exterior");
+                        setActiveImageIndex(0);
+                      }}
+                      className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all backdrop-blur-sm border ${
+                        galleryTab === "exterior"
                           ? "bg-[#E53935] text-white border-[#E53935]"
                           : "bg-black/50 text-white/80 border-white/20 hover:bg-black/70"
-                        }`}
+                      }`}
                     >
                       Exterior
                     </button>
                     <button
-                      onClick={() => { setGalleryTab("interior"); setActiveImageIndex(0); }}
-                      className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all backdrop-blur-sm border ${galleryTab === "interior"
+                      onClick={() => {
+                        setGalleryTab("interior");
+                        setActiveImageIndex(0);
+                      }}
+                      className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all backdrop-blur-sm border ${
+                        galleryTab === "interior"
                           ? "bg-[#E53935] text-white border-[#E53935]"
                           : "bg-black/50 text-white/80 border-white/20 hover:bg-black/70"
-                        }`}
+                      }`}
                     >
                       Interior
                     </button>
@@ -187,13 +198,19 @@ export function VehicleDetails() {
 
                   {/* Prev / Next arrows */}
                   <button
-                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevImage();
+                    }}
                     className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-[#E53935] text-white opacity-0 group-hover/gallery:opacity-100 transition-all"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
-                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextImage();
+                    }}
                     className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-[#E53935] text-white opacity-0 group-hover/gallery:opacity-100 transition-all"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -212,10 +229,11 @@ export function VehicleDetails() {
                     <button
                       key={idx}
                       onClick={() => setActiveImageIndex(idx)}
-                      className={`relative h-14 w-20 rounded-lg overflow-hidden shrink-0 transition-all ${activeImageIndex === idx
+                      className={`relative h-14 w-20 rounded-lg overflow-hidden shrink-0 transition-all ${
+                        activeImageIndex === idx
                           ? "ring-2 ring-primary scale-95"
                           : "opacity-50 hover:opacity-100"
-                        }`}
+                      }`}
                     >
                       <img src={img} alt="thumbnail" className="w-full h-full object-cover" />
                     </button>
@@ -226,7 +244,9 @@ export function VehicleDetails() {
               {/* Seller Description */}
               {/* FIX 2: removed max-w-3xl mx-auto lg:mx-0 — replaced with w-full so it aligns with gallery */}
               <div className="glass rounded-2xl sm:rounded-3xl p-6 md:p-8 border border-white/5 w-full">
-                <h2 className="font-display text-lg sm:text-xl md:text-2xl font-bold mb-4">Seller Description</h2>
+                <h2 className="font-display text-lg sm:text-xl md:text-2xl font-bold mb-4">
+                  Seller Description
+                </h2>
                 <p className="text-muted-foreground text-sm md:text-base leading-relaxed whitespace-pre-line">
                   {car.description}
                 </p>
@@ -236,16 +256,21 @@ export function VehicleDetails() {
             {/* Right Column — Single Combined Card */}
             <div className="lg:sticky lg:top-28">
               <div className="glass rounded-2xl sm:rounded-3xl border border-white/5 overflow-hidden">
-
                 {/* Price */}
                 <div className="p-5 sm:p-6 border-b border-white/5 bg-surface/60">
-                  <span className="text-xs text-muted-foreground uppercase tracking-widest block mb-1">Selling Price</span>
-                  <span className="font-display text-2xl sm:text-3xl font-extrabold text-gold">{car.price}</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-widest block mb-1">
+                    Selling Price
+                  </span>
+                  <span className="font-display text-2xl sm:text-3xl font-extrabold text-gold">
+                    {car.price}
+                  </span>
                 </div>
 
                 {/* Vehicle Overview */}
                 <div className="p-5 sm:p-6 border-b border-white/5">
-                  <h3 className="font-display text-sm font-bold mb-4 text-white/90 uppercase tracking-wide">Vehicle Overview</h3>
+                  <h3 className="font-display text-sm font-bold mb-4 text-white/90 uppercase tracking-wide">
+                    Vehicle Overview
+                  </h3>
                   <div className="grid grid-cols-2 gap-y-3.5 gap-x-4">
                     <div>
                       <div className="flex items-center gap-1.5 text-muted-foreground mb-0.5">
@@ -303,7 +328,9 @@ export function VehicleDetails() {
                 <div className="p-5 sm:p-6 border-b border-white/5">
                   <div className="flex items-center gap-2 mb-4">
                     <Award className="w-4 h-4 text-primary" />
-                    <h3 className="font-display text-sm font-bold text-white/90 uppercase tracking-wide">RTO Information</h3>
+                    <h3 className="font-display text-sm font-bold text-white/90 uppercase tracking-wide">
+                      RTO Information
+                    </h3>
                   </div>
                   <div className="flex flex-col gap-2.5">
                     <div className="flex justify-between items-center">
@@ -340,20 +367,25 @@ export function VehicleDetails() {
                       <span className="text-muted-foreground text-xs flex items-center gap-1.5 shrink-0">
                         <ShieldCheck className="w-3 h-3" /> Authority
                       </span>
-                      <span className="font-semibold text-white text-xs text-right max-w-[55%]">{rto.authority}</span>
+                      <span className="font-semibold text-white text-xs text-right max-w-[55%]">
+                        {rto.authority}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 {/* Wishlist + Contact */}
                 <div className="p-5 sm:p-6 flex flex-col gap-2.5">
-                  <h4 className="font-display text-sm font-bold text-white/80 mb-1">Interested in this car?</h4>
+                  <h4 className="font-display text-sm font-bold text-white/80 mb-1">
+                    Interested in this car?
+                  </h4>
                   <button
                     onClick={handleWishlistToggle}
-                    className={`w-full flex items-center justify-center gap-2 rounded-full py-3 px-6 text-sm font-semibold transition-all ${isFav
+                    className={`w-full flex items-center justify-center gap-2 rounded-full py-3 px-6 text-sm font-semibold transition-all ${
+                      isFav
                         ? "bg-primary text-white shadow-gold-glow"
                         : "bg-surface hover:bg-surface-elevated border border-white/10"
-                      }`}
+                    }`}
                   >
                     <Heart className={`w-4 h-4 ${isFav ? "fill-current scale-110" : ""}`} />
                     {isFav ? "Saved to Wishlist" : "Add to Wishlist"}
@@ -379,7 +411,6 @@ export function VehicleDetails() {
                     <Mail className="w-4 h-4" /> Email Dealership
                   </a>
                 </div>
-
               </div>
             </div>
           </div>
@@ -387,7 +418,9 @@ export function VehicleDetails() {
           {/* Similar Vehicles */}
           <div className="border-t border-border/60 pt-12 sm:pt-16">
             <div className="flex flex-col gap-2 mb-8 sm:mb-10">
-              <div className="text-xs uppercase tracking-[0.3em] text-gold">Handpicked Alternatives</div>
+              <div className="text-xs uppercase tracking-[0.3em] text-gold">
+                Handpicked Alternatives
+              </div>
               <h2 className="font-display text-2xl md:text-3xl font-bold">Similar Vehicles</h2>
             </div>
 
@@ -411,34 +444,62 @@ export function VehicleDetails() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-l-2xl"
                       />
                       <button
-                        onClick={(e) => { e.stopPropagation(); isSimilarFav ? remove(c.id) : add(c); }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (isSimilarFav) {
+                            remove(c.id);
+                          } else {
+                            add(c);
+                          }
+                        }}
                         className="absolute top-2 right-2 p-1.5 rounded-full bg-black/70 hover:bg-[#E53935] text-white z-10"
                       >
-                        <Heart className={`w-3.5 h-3.5 ${isSimilarFav ? "fill-[#E53935] text-[#E53935]" : ""}`} />
+                        <Heart
+                          className={`w-3.5 h-3.5 ${isSimilarFav ? "fill-[#E53935] text-[#E53935]" : ""}`}
+                        />
                       </button>
                     </div>
 
                     <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between min-w-0">
                       <div>
                         <div className="flex items-center gap-1.5 mb-1">
-                          <span className="text-[10px] font-bold text-[#E53935] uppercase tracking-wider">{c.brand}</span>
+                          <span className="text-[10px] font-bold text-[#E53935] uppercase tracking-wider">
+                            {c.brand}
+                          </span>
                           <span className="text-white/30">•</span>
                           <span className="text-[#B0B0B0] text-[10px] uppercase">{c.tag}</span>
                         </div>
-                        <h3 className="font-display font-semibold text-sm leading-tight line-clamp-2 group-hover:text-primary">{c.name}</h3>
-                        <div className="font-display font-bold text-gold mt-1 text-sm">{c.price}</div>
+                        <h3 className="font-display font-semibold text-sm leading-tight line-clamp-2 group-hover:text-primary">
+                          {c.name}
+                        </h3>
+                        <div className="font-display font-bold text-gold mt-1 text-sm">
+                          {c.price}
+                        </div>
                       </div>
                       <div className="text-xs text-muted-foreground">
                         {c.year} • {c.fuel} • {c.trans}
                       </div>
                       <div className="flex justify-between items-center text-xs pt-2 border-t border-white/10 mt-auto">
                         <button
-                          onClick={(e) => { e.stopPropagation(); isSimilarFav ? remove(c.id) : add(c); }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (isSimilarFav) {
+                              remove(c.id);
+                            } else {
+                              add(c);
+                            }
+                          }}
                           className="flex items-center gap-1 text-[#B0B0B0] hover:text-white"
                         >
-                          <Heart className={`w-3.5 h-3.5 ${isSimilarFav ? "fill-current text-[#E53935]" : ""}`} /> Wishlist
+                          <Heart
+                            className={`w-3.5 h-3.5 ${isSimilarFav ? "fill-current text-[#E53935]" : ""}`}
+                          />{" "}
+                          Wishlist
                         </button>
-                        <Link to={`/details/${c.id}`} className="flex items-center gap-1 text-white hover:text-primary">
+                        <Link
+                          to={`/details/${c.id}`}
+                          className="flex items-center gap-1 text-white hover:text-primary"
+                        >
                           View <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
@@ -448,7 +509,6 @@ export function VehicleDetails() {
               })}
             </div>
           </div>
-
         </div>
       </main>
       <Footer />
