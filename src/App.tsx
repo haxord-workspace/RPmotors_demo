@@ -3,6 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Lenis from "lenis";
 import { Index } from "./routes/index";
+import { Wishlist } from "./routes/wishlist";
+import { VehicleDetails } from "./routes/details";
+import { RtoDirectory } from "./routes/rto";
+import { RtoDetails } from "./routes/rtoDetails";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +34,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/details/:id" element={<VehicleDetails />} />
+          <Route path="/rto" element={<RtoDirectory />} />
+          <Route path="/rto/:code" element={<RtoDetails />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

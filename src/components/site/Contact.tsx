@@ -57,7 +57,9 @@ export function Contact() {
               ].map(({ icon: Icon, title, text }) => (
                 <div key={title} className="glass rounded-2xl p-5 hover-lift">
                   <Icon className="w-5 h-5 text-gold mb-3" />
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{title}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+                    {title}
+                  </div>
                   <div className="text-sm whitespace-pre-line text-foreground">{text}</div>
                 </div>
               ))}
@@ -68,21 +70,43 @@ export function Contact() {
           <form onSubmit={onSubmit} className="glass rounded-2xl p-8 space-y-5">
             <h3 className="font-display text-2xl font-semibold">Send us an enquiry</h3>
             <div className="grid sm:grid-cols-2 gap-4">
-              <input name="name" placeholder="Full name" maxLength={100}
-                className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors" />
-              <input name="phone" placeholder="Phone" maxLength={20}
-                className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors" />
+              <input
+                name="name"
+                placeholder="Full name"
+                maxLength={100}
+                className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors"
+              />
+              <input
+                name="phone"
+                placeholder="Phone"
+                maxLength={20}
+                className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors"
+              />
             </div>
-            <input name="email" type="email" placeholder="Email" maxLength={255}
-              className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors" />
-            <textarea name="message" placeholder="Tell us which car you're looking for…" rows={5} maxLength={1000}
-              className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors resize-none" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              maxLength={255}
+              className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors"
+            />
+            <textarea
+              name="message"
+              placeholder="Tell us which car you're looking for…"
+              rows={5}
+              maxLength={1000}
+              className="w-full bg-surface-elevated border border-border rounded-xl px-4 py-3.5 text-sm outline-none focus:border-gold transition-colors resize-none"
+            />
 
             {status === "error" && <p className="text-sm text-destructive">{error}</p>}
-            {status === "success" && <p className="text-sm text-gold">Thanks! We'll get back to you shortly.</p>}
+            {status === "success" && (
+              <p className="text-sm text-gold">Thanks! We'll get back to you shortly.</p>
+            )}
 
-            <button type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-gold text-gold-foreground font-semibold shadow-gold-glow hover:scale-[1.02] transition-transform">
+            <button
+              type="submit"
+              className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-gold text-gold-foreground font-semibold shadow-gold-glow hover:scale-[1.02] transition-transform"
+            >
               <Send className="w-4 h-4" /> Send Enquiry
             </button>
           </form>

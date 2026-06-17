@@ -1,38 +1,41 @@
 import { useState } from "react";
-import { Fuel, Gauge, Calendar, ArrowRight } from "lucide-react";
-import car1 from "@/assets/car-1.jpg";
-import car2 from "@/assets/car-2.jpg";
-import car3 from "@/assets/car-3.jpg";
-import car4 from "@/assets/car-4.jpg";
-import car5 from "@/assets/car-5.jpg";
-import car6 from "@/assets/car-6.jpg";
-
-const cars = [
-  { img: car1, name: "BMW 5 Series", brand: "BMW", year: 2021, fuel: "Petrol", trans: "Automatic", price: "₹ 38.5 L", tag: "Sedan" },
-  { img: car2, name: "Mercedes-Benz GLS", brand: "Benz", year: 2022, fuel: "Diesel", trans: "Automatic", price: "₹ 72.0 L", tag: "SUV" },
-  { img: car3, name: "Audi A4 Premium", brand: "Audi", year: 2020, fuel: "Petrol", trans: "Automatic", price: "₹ 32.0 L", tag: "Sedan" },
-  { img: car4, name: "Toyota Fortuner", brand: "Toyota", year: 2022, fuel: "Diesel", trans: "Automatic", price: "₹ 36.5 L", tag: "SUV" },
-  { img: car5, name: "Hyundai Tucson", brand: "Hyundai", year: 2023, fuel: "Petrol", trans: "Automatic", price: "₹ 24.0 L", tag: "SUV" },
-  { img: car6, name: "Kia Seltos GTX+", brand: "Kia", year: 2023, fuel: "Petrol", trans: "Manual", price: "₹ 16.5 L", tag: "SUV" },
-];
+import { Fuel, Gauge, Calendar, ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { cars } from "@/data/cars";
+import { useWishlist } from "@/hooks/useWishlist";
+import { FullscreenImageViewer } from "./FullscreenImageViewer";
 
 const filters = ["All", "BMW", "Benz", "Audi", "Toyota", "Hyundai", "Kia"];
 
 export function Cars() {
   const [filter, setFilter] = useState("All");
+  const { has, add, remove } = useWishlist();
   const list = cars.filter((c) => filter === "All" || c.brand === filter);
+
+  // Fullscreen image viewer state
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerImages, setViewerImages] = useState<string[]>([]);
+  const [viewerInitialIndex, setViewerInitialIndex] = useState(0);
+
+  const openImageViewer = (images: string[], index: number) => {
+    setViewerImages(images);
+    setViewerInitialIndex(index);
+    setViewerOpen(true);
+  };
 
   return (
     <section id="cars" className="relative py-28">
       <div className="container mx-auto px-6">
-<div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-12">
-            <div>
-              <div className="text-xs uppercase tracking-[0.3em] text-gold mb-4">Featured Inventory</div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold">
-                Find your <span className="text-gradient-gold">perfect drive</span>
-              </h2>
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-12">
+          <div>
+            <div className="text-xs uppercase tracking-[0.3em] text-gold mb-4">
+              Featured Inventory
             </div>
-            <div className="flex flex-wrap justify-center gap-2">
+            <h2 className="font-display text-4xl md:text-5xl font-bold">
+              Find your <span className="text-gradient-gold">perfect drive</span>
+            </h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
             {filters.map((f) => (
               <button
                 key={f}
@@ -49,46 +52,130 @@ export function Cars() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {list.map((c) => (
-            <article key={c.name} className="group glass rounded-2xl overflow-hidden hover-lift">
-              <div className="relative aspect-[4/3] overflow-hidden bg-surface-elevated">
-                <img
-                  src={c.img}
-                  alt={c.name}
-                  loading="lazy"
-                  width={1024}
-                  height={704}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full glass-strong text-xs font-semibold text-foreground">
-                  {c.brand}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {list.map((c) => {
+            const isFav = has(c.id);
+            return (
+              <article
+                key={c.id}
+                className="group bg-[#151822] border border-white/5 hover:border-primary/20 rounded-[12px] overflow-hidden hover-lift flex flex-row h-[120px] md:h-[140px] lg:h-[160px] relative shadow-md"
+              >
+                {/* Left side: Vehicle Image */}
+                <div
+                  className="relative w-1/3 md:w-2/5 shrink-0 bg-surface-elevated overflow-hidden border-r border-white/5 cursor-pointer"
+                  onClick={() => openImageViewer(c.images, 0)}
+                >
+                  <img
+                    src={c.img}
+                    alt={c.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-l-[12px]"
+                  />
+                  {/* Floating Wishlist Icon on Top-Right of image */}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (isFav) {
+                        remove(c.id);
+                      } else {
+                        add(c);
+                      }
+                    }}
+                    className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 hover:bg-[#E53935] hover:scale-105 text-white transition-all cursor-pointer z-10 shadow-md border border-white/10"
+                    aria-label={isFav ? "Remove from wishlist" : "Add to wishlist"}
+                  >
+                    <Heart
+                      className={`w-3 h-3 transition-colors duration-300 ${
+                        isFav ? "fill-[#E53935] text-[#E53935]" : "text-white"
+                      }`}
+                    />
+                  </button>
                 </div>
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full glass-strong text-xs font-semibold text-gold">
-                  {c.tag}
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <h3 className="font-display text-xl font-semibold leading-tight">{c.name}</h3>
-                  <div className="text-right">
-                    <div className="text-xs text-muted-foreground">Price</div>
-                    <div className="font-display font-bold text-gold">{c.price}</div>
+
+                {/* Right side: Info */}
+                <div className="p-3 md:p-4 flex flex-col justify-between flex-1 min-w-0">
+                  <div className="min-w-0">
+                    {/* Brand & Tag badges */}
+                    <div className="flex items-center gap-1.5 mb-0.5 md:mb-1">
+                      <span className="text-[9px] font-bold text-[#E53935] uppercase tracking-wider">
+                        {c.brand}
+                      </span>
+                      <span className="text-white/25 text-[9px]">•</span>
+                      <span className="text-[#B0B0B0] text-[9px] uppercase tracking-wider font-semibold">
+                        {c.tag}
+                      </span>
+                    </div>
+
+                    {/* Vehicle Name */}
+                    <h3 className="font-display font-bold text-xs md:text-sm lg:text-base text-white truncate group-hover:text-primary transition-colors leading-snug">
+                      {c.name}
+                    </h3>
+
+                    {/* Selling Price */}
+                    <div className="font-display font-extrabold text-xs md:text-sm lg:text-base text-gold mt-0.5">
+                      {c.price}
+                    </div>
+
+                    {/* Fuel Type • Year • Transmission */}
+                    <div className="flex items-center gap-1 text-[9px] md:text-xs text-[#B0B0B0] mt-0.5 md:mt-1 truncate font-medium">
+                      <span>{c.fuel}</span>
+                      <span className="text-white/10">•</span>
+                      <span>{c.year}</span>
+                      <span className="text-white/10">•</span>
+                      <span>{c.trans}</span>
+                    </div>
+
+                    {/* KM Driven */}
+                    <div className="text-[9px] md:text-xs text-[#B0B0B0] mt-0.5 font-medium">
+                      {c.kmDriven} Driven
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center justify-between gap-2 mt-2 border-t border-white/5 pt-2">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isFav) {
+                          remove(c.id);
+                        } else {
+                          add(c);
+                        }
+                      }}
+                      className="flex items-center gap-1 text-[9px] md:text-xs font-semibold text-[#B0B0B0] hover:text-[#E53935] transition-colors cursor-pointer shrink-0"
+                      aria-label={isFav ? "Remove from wishlist" : "Add to wishlist"}
+                    >
+                      <Heart
+                        className={`w-3.5 h-3.5 transition-colors duration-300 ${
+                          isFav ? "fill-[#E53935] text-[#E53935]" : "text-[#B0B0B0]"
+                        }`}
+                      />
+                      <span>Wishlist</span>
+                    </button>
+
+                    <Link
+                      to={`/details/${c.id}`}
+                      className="inline-flex items-center gap-1 text-[9px] md:text-xs font-semibold text-white hover:text-[#E53935] transition-colors shrink-0"
+                    >
+                      View Details <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2 py-4 border-y border-border/60 text-xs text-muted-foreground">
-                  <div className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-gold" />{c.year}</div>
-                  <div className="flex items-center gap-1.5"><Fuel className="w-3.5 h-3.5 text-gold" />{c.fuel}</div>
-                  <div className="flex items-center gap-1.5"><Gauge className="w-3.5 h-3.5 text-gold" />{c.trans}</div>
-                </div>
-                <a href="#contact" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-gold transition-colors">
-                  View Details <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
+
+      {/* Fullscreen Image Viewer Modal */}
+      <FullscreenImageViewer
+        images={viewerImages}
+        initialIndex={viewerInitialIndex}
+        isOpen={viewerOpen}
+        onClose={() => setViewerOpen(false)}
+      />
     </section>
   );
 }

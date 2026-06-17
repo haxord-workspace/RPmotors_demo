@@ -1,12 +1,24 @@
 import { Search, ClipboardCheck, Wrench, Tag, Car, Key } from "lucide-react";
 
 const steps = [
-  { icon: Search, title: "Vehicle Sourcing", text: "Hand-picking the finest pre-owned cars from trusted owners." },
-  { icon: ClipboardCheck, title: "Inspection & Quality Check", text: "200+ point quality and safety verification." },
+  {
+    icon: Search,
+    title: "Vehicle Sourcing",
+    text: "Hand-picking the finest pre-owned cars from trusted owners.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Inspection & Quality Check",
+    text: "200+ point quality and safety verification.",
+  },
   { icon: Wrench, title: "Reconditioning", text: "Mechanical, cosmetic and detailing refinement." },
   { icon: Tag, title: "Pricing & Listing", text: "Transparent, fair market-driven pricing." },
   { icon: Car, title: "Customer Test Drive", text: "Experience the car before you commit." },
-  { icon: Key, title: "Delivery & Documentation", text: "Hassle-free paperwork and on-time handover." },
+  {
+    icon: Key,
+    title: "Delivery & Documentation",
+    text: "Hassle-free paperwork and on-time handover.",
+  },
 ];
 
 export function Process() {
@@ -23,7 +35,7 @@ export function Process() {
         <div className="relative">
           {/* timeline line */}
           <div className="hidden md:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-          
+
           {/* Desktop Grid */}
           <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-6">
             {steps.map(({ icon: Icon, title, text }, i) => (

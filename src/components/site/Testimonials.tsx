@@ -1,16 +1,33 @@
 import { Star, Quote } from "lucide-react";
 
 const reviews = [
-  { name: "Ananthu Krishnan", role: "Calicut", rating: 5, text: "Bought my BMW from RP Motors. The transparency and after-sale support were unmatched. Felt like buying from a true luxury dealer." },
-  { name: "Fathima Riyaz", role: "Malappuram", rating: 5, text: "From inspection to documentation, every step was effortless. The team made sure my Fortuner was delivered in showroom condition." },
-  { name: "Vishnu Menon", role: "Kochi", rating: 5, text: "Genuine pricing, no hidden charges and a beautiful showroom experience. RP Motors has truly raised the bar in Kerala." },
+  {
+    name: "Ananthu Krishnan",
+    role: "Calicut",
+    rating: 5,
+    text: "Bought my BMW from RP Motors. The transparency and after-sale support were unmatched. Felt like buying from a true luxury dealer.",
+  },
+  {
+    name: "Fathima Riyaz",
+    role: "Malappuram",
+    rating: 5,
+    text: "From inspection to documentation, every step was effortless. The team made sure my Fortuner was delivered in showroom condition.",
+  },
+  {
+    name: "Vishnu Menon",
+    role: "Kochi",
+    rating: 5,
+    text: "Genuine pricing, no hidden charges and a beautiful showroom experience. RP Motors has truly raised the bar in Kerala.",
+  },
 ];
 
 export function Testimonials() {
   return (
     <section className="relative py-28 bg-surface overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
-        style={{ background: "var(--gradient-radial-gold)" }} />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "var(--gradient-radial-gold)" }}
+      />
 
       <div className="container mx-auto px-6 relative">
         <div className="text-center max-w-2xl mx-auto mb-16">
