@@ -25,25 +25,33 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !started.current) {
-        started.current = true;
-        const duration = 1800;
-        const start = performance.now();
-        const tick = (now: number) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          setN(Math.round(to * eased));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }
-    }, { threshold: 0.4 });
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !started.current) {
+          started.current = true;
+          const duration = 1800;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(to * eased));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 },
+    );
     obs.observe(el);
     return () => obs.disconnect();
   }, [to]);
 
-  return <span ref={ref}>{n}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {n}
+      {suffix}
+    </span>
+  );
 }
 
 export function WhyChooseUs() {
@@ -58,13 +66,16 @@ export function WhyChooseUs() {
               <span className="text-gradient-gold">Driven by excellence.</span>
             </h2>
             <p className="mt-6 text-muted-foreground text-lg">
-              Every car we deliver carries our promise — inspected, certified, and priced
-              fairly so you make confident decisions.
+              Every car we deliver carries our promise — inspected, certified, and priced fairly so
+              you make confident decisions.
             </p>
 
             <div className="mt-10 grid grid-cols-2 gap-4">
               {features.map(({ icon: Icon, title }) => (
-                <div key={title} className="flex items-center gap-3 p-4 rounded-xl glass hover-lift">
+                <div
+                  key={title}
+                  className="flex items-center gap-3 p-4 rounded-xl glass hover-lift"
+                >
                   <Icon className="w-5 h-5 text-gold shrink-0" />
                   <span className="text-sm font-medium">{title}</span>
                 </div>
@@ -78,7 +89,9 @@ export function WhyChooseUs() {
                 <div className="font-display text-5xl font-bold text-gradient-gold">
                   <Counter to={s.value} suffix={s.suffix} />
                 </div>
-                <div className="text-sm text-muted-foreground mt-2 uppercase tracking-wider">{s.label}</div>
+                <div className="text-sm text-muted-foreground mt-2 uppercase tracking-wider">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>

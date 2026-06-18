@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { About } from "@/components/site/About";
@@ -14,22 +14,20 @@ import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "RP Motors Wandoor — Premium Pre-Owned Cars in Kerala" },
-      { name: "description", content: "RP Motors, Wandoor — Kerala's trusted premium used car dealership. Certified vehicles, transparent pricing, finance & RC transfer support." },
-      { property: "og:title", content: "RP Motors Wandoor — Premium Pre-Owned Cars in Kerala" },
-      { property: "og:description", content: "Certified premium pre-owned cars from RP Motors, Wandoor — Malappuram, Kerala." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: Index,
-});
+export function Index() {
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        // Delay slightly for render cycles and Lenis initialization
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 200);
+      }
+    }
+  }, []);
 
-function Index() {
   return (
     <div className="bg-background text-foreground">
       <Navbar />

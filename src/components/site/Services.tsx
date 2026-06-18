@@ -1,12 +1,36 @@
 import { Car, Tag, Banknote, ShieldCheck, FileText, Search } from "lucide-react";
 
 const services = [
-  { icon: Car, title: "Buy Premium Used Cars", text: "Curated, certified pre-owned cars across top brands." },
-  { icon: Tag, title: "Sell Your Car", text: "Best market value with instant quotes and quick settlement." },
-  { icon: Banknote, title: "Vehicle Finance", text: "Tailored finance options from leading banks & NBFCs." },
-  { icon: ShieldCheck, title: "Insurance Support", text: "End-to-end insurance assistance for total peace of mind." },
-  { icon: FileText, title: "RC Transfer", text: "Seamless ownership transfer handled by our experts." },
-  { icon: Search, title: "Vehicle Inspection", text: "200-point inspection to guarantee quality & safety." },
+  {
+    icon: Car,
+    title: "Buy Premium Used Cars",
+    text: "Curated, certified pre-owned cars across top brands.",
+  },
+  {
+    icon: Tag,
+    title: "Sell Your Car",
+    text: "Best market value with instant quotes and quick settlement.",
+  },
+  {
+    icon: Banknote,
+    title: "Vehicle Finance",
+    text: "Tailored finance options from leading banks & NBFCs.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Insurance Support",
+    text: "End-to-end insurance assistance for total peace of mind.",
+  },
+  {
+    icon: FileText,
+    title: "RC Transfer",
+    text: "Seamless ownership transfer handled by our experts.",
+  },
+  {
+    icon: Search,
+    title: "Vehicle Inspection",
+    text: "200-point inspection to guarantee quality & safety.",
+  },
 ];
 
 export function Services() {
@@ -31,8 +55,10 @@ export function Services() {
               key={title}
               className="group relative p-8 rounded-2xl glass hover-lift overflow-hidden min-w-[85vw] sm:min-w-0 shrink-0 snap-center"
             >
-              <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: "var(--gradient-radial-gold)" }} />
+              <div
+                className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: "var(--gradient-radial-gold)" }}
+              />
               <div className="relative">
                 <div className="w-14 h-14 rounded-xl bg-gradient-gold flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Icon className="w-6 h-6 text-gold-foreground" />

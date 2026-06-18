@@ -1,4 +1,14 @@
-import { SiBmw, SiAudi, SiToyota, SiMahindra, SiHyundai, SiKia, SiHonda, SiTata, SiVolkswagen } from "react-icons/si";
+import {
+  SiBmw,
+  SiAudi,
+  SiToyota,
+  SiMahindra,
+  SiHyundai,
+  SiKia,
+  SiHonda,
+  SiTata,
+  SiVolkswagen,
+} from "react-icons/si";
 
 const MercedesIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -16,7 +26,7 @@ const brandIcons = [
   { name: "Kia", Icon: SiKia },
   { name: "Honda", Icon: SiHonda },
   { name: "Tata", Icon: SiTata },
-  { name: "Volkswagen", Icon: SiVolkswagen }
+  { name: "Volkswagen", Icon: SiVolkswagen },
 ];
 
 export function Brands() {
@@ -33,7 +43,7 @@ export function Brands() {
       <div className="relative flex items-center">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        
+
         <div className="flex gap-20 items-center animate-marquee whitespace-nowrap min-w-max px-10">
           {list.map(({ name, Icon }, i) => (
             <div

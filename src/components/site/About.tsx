@@ -19,7 +19,9 @@ export function About() {
           </div>
           <div className="absolute -bottom-8 -right-4 lg:-right-8 glass-strong rounded-2xl p-6 max-w-[260px] shadow-gold-glow">
             <div className="font-display text-4xl font-bold text-gradient-gold">12+</div>
-            <div className="text-sm text-muted-foreground mt-1">Years of trust building Kerala's finest pre-owned car experience</div>
+            <div className="text-sm text-muted-foreground mt-1">
+              Years of trust building Kerala's finest pre-owned car experience
+            </div>
           </div>
         </div>
 
@@ -30,17 +32,29 @@ export function About() {
             <span className="text-gradient-gold">A promise of trust.</span>
           </h2>
           <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-            RP Motors was built with a passion for delivering quality pre-owned vehicles
-            and a hassle-free buying experience for customers across Kerala. From the heart
-            of Wandoor, we curate every car with obsessive attention to detail — so you drive
-            home confident in every kilometre ahead.
+            RP Motors was built with a passion for delivering quality pre-owned vehicles and a
+            hassle-free buying experience for customers across Kerala. From the heart of Wandoor, we
+            curate every car with obsessive attention to detail — so you drive home confident in
+            every kilometre ahead.
           </p>
 
           <div className="mt-10 space-y-5">
             {[
-              { icon: ShieldCheck, title: "Trust & Transparency", text: "Verified history, honest pricing, and zero hidden surprises on every vehicle." },
-              { icon: Heart, title: "Passion for Automobiles", text: "Hand-picked by enthusiasts who treat every car like their own." },
-              { icon: Sparkles, title: "Customer-First Experience", text: "From first visit to lifetime support — we make ownership effortless." },
+              {
+                icon: ShieldCheck,
+                title: "Trust & Transparency",
+                text: "Verified history, honest pricing, and zero hidden surprises on every vehicle.",
+              },
+              {
+                icon: Heart,
+                title: "Passion for Automobiles",
+                text: "Hand-picked by enthusiasts who treat every car like their own.",
+              },
+              {
+                icon: Sparkles,
+                title: "Customer-First Experience",
+                text: "From first visit to lifetime support — we make ownership effortless.",
+              },
             ].map(({ icon: Icon, title, text }) => (
               <div key={title} className="flex gap-4">
                 <div className="shrink-0 w-12 h-12 rounded-xl glass flex items-center justify-center">
